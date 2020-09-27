@@ -7,7 +7,7 @@ pipeline {
         stage('S3 - create bucket') {
             steps {
                 // script {
-                //     createS3Bucket('javahome-tf-7739-us-west')
+                //     createS3Bucket('alawliet-terraform')
                 // }
                 sh 'ansible-playbook s3-bucket.yaml'
             }

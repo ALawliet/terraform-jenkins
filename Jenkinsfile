@@ -9,25 +9,25 @@ pipeline {
                 // script {
                 //     createS3Bucket('alawliet-terraform')
                 // }
-                sh 'ansible-playbook s3-bucket.yaml'
+                sh 'ansible-playbook ./ansible/s3-bucket.yaml'
             }
         }
 
         stage('terraform init and apply - dev') {
             steps {
                 sh returnStatus: true, script: 'terraform workspace new dev'
-                sh 'terraform init'
+                sh 'terraform init ./terraform'
                 // sh 'terraform apply -var-file=dev.tfvars -auto-approve'
-                sh 'ansible-playbook terraform.yaml'
+                sh 'ansible-playbook ./ansible/terraform.yaml'
             }
         }
 
         stage('terraform init and apply - prod') {
             steps {
                 sh returnStatus: true, script: 'terraform workspace new prod'
-                sh 'terraform init'
+                sh 'terraform init ./terraform'
                 // sh 'terraform apply -var-file=prod.tfvars -auto-approve'
-                sh 'ansible-playbook terraform.yaml -e app_env=prod'
+                sh 'ansible-playbook ./ansible/terraform.yaml -e app_env=prod'
             }
         }
     }

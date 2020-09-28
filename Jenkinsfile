@@ -23,7 +23,7 @@ pipeline {
                 sh 'terraform init ./terraform'
                 sh 'terraform validate ./terraform'
                 sh 'terraform plan -detailed-exitcode -out=plan.out ./terraform'
-                sh 'terraform apply plan.out'
+                sh 'terraform apply "plan.out"'
             }
         }
     }

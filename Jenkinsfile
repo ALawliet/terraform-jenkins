@@ -11,6 +11,12 @@ pipeline {
                 echo 'hello world'
             }
         }
+
+        stage('S3 - create bucket') {
+            steps {
+                sh 'ansible-playbook ./ansible/s3-bucket.yaml'
+            }
+        }
     }
 }
 

@@ -18,12 +18,18 @@ pipeline {
             }
         }
 
-        stage('terraform init and apply') {
+        stage('Route53 - Terraform') {
             steps {
                 sh 'terraform init'
                 sh 'terraform validate'
                 sh 'terraform plan'
                 sh 'terraform apply -auto-approve'
+            }
+        }
+
+        stage('Route53 - Ansible') {
+            steps {
+                sh 'ansible-playbook ./ansible/route53.yaml'
             }
         }
     }

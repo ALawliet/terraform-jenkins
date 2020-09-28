@@ -1,0 +1,12 @@
+---
+- hosts:
+  tasks:
+    - name: Add jenkins2.yokotheshibe.com as an A record with 1 IP and wait until the changes have been replicated
+      community.aws.route53:
+        state: present
+        zone: yokotheshibe.com
+        record: jenkins2.yokotheshibe.com
+        type: A
+        ttl: 300
+        value: 54.196.220.82
+        wait: yes

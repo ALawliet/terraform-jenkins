@@ -20,10 +20,10 @@ pipeline {
 
         stage('terraform init and apply') {
             steps {
-                sh 'terraform init ./terraform'
-                sh 'terraform validate ./terraform'
-                sh 'terraform plan -detailed-exitcode -out=plan.out ./terraform'
-                sh 'terraform apply "plan.out"'
+                sh 'terraform init'
+                sh 'terraform validate'
+                sh 'terraform plan'
+                sh 'terraform apply'
             }
         }
     }

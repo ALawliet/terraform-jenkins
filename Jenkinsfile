@@ -17,6 +17,14 @@ pipeline {
                 sh 'ansible-playbook ./ansible/s3-bucket.yaml'
             }
         }
+
+        stage('terraform init and apply') {
+            steps {
+                sh 'terraform init ./terraform'
+                sh 'terraform plan'
+                sh 'terraform apply -auto-approve'
+            }
+        }
     }
 }
 

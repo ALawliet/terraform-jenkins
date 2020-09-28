@@ -8,5 +8,5 @@
     #     state: present
     - name: Create S3 bucket
       s3_bucket:
-        name: terraform-yoko-20200907
+        name: terraform-yoko-20200927
         state: present

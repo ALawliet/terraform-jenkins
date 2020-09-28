@@ -12,13 +12,13 @@ pipeline {
             }
         }
 
-        stage('S3 - create bucket') {
+        stage('S3 - Create Bucket w/ Ansible') {
             steps {
                 sh 'ansible-playbook ./ansible/s3-bucket.yaml'
             }
         }
 
-        stage('Route53 - Terraform') {
+        stage('Route53 - Add Record w/ Terraform') {
             steps {
                 sh 'terraform init'
                 sh 'terraform validate'
@@ -27,7 +27,7 @@ pipeline {
             }
         }
 
-        stage('Route53 - Ansible') {
+        stage('Route53 - Add Record w/ Ansible') {
             steps {
                 sh 'ansible-playbook ./ansible/route53.yaml'
             }

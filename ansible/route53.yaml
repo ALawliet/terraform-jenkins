@@ -1,6 +1,11 @@
 ---
 - hosts: localhost
+  # become: True
   tasks:
+    # - name: Install boto
+    #   pip:
+    #     name: boto
+    #     state: present
     - name: Add jenkins2.yokotheshibe.com as an A record with 1 IP and wait until the changes have been replicated
       community.aws.route53:
         state: present

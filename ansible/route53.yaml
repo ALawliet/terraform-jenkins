@@ -1,5 +1,5 @@
 ---
-- hosts:
+- hosts: localhost
   tasks:
     - name: Add jenkins2.yokotheshibe.com as an A record with 1 IP and wait until the changes have been replicated
       community.aws.route53:

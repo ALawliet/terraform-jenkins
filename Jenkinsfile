@@ -1,3 +1,5 @@
+@Library('shared-library@master')
+
 pipeline {
     agent any
 
@@ -30,6 +32,12 @@ pipeline {
         stage('Route53 - Add Record w/ Ansible') {
             steps {
                 sh 'ansible-playbook ./ansible/route53.yaml'
+            }
+        }
+
+        stage('Check logs') {
+            steps {
+                filterLogs('WARNING', 1)
             }
         }
     }

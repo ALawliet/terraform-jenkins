@@ -3,7 +3,7 @@ resource "aws_route53_zone" "yoko_zone" {
 }
 
 resource "aws_route53_record" "jenkins_record" {
-  zone_id = "${aws_route53_zone.yokozone.zone_id}"
+  zone_id = aws_route53_zone.yoko_zone.zone_id
   name    = "jenkins.yokotheshibe.com"
   type    = "A"
   ttl     = "300"

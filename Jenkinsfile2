@@ -1,0 +1,273 @@
+@Library('DNS@AWS')
+@getDNS
+@Library('DNS@GCP')
+
+interface DNS {
+    void addDNSRecord(a, b)
+    int add(int, a, int b)
+}
+
+class AWS_DNS implements DNS {
+    void addDNSRecord(a, b) {
+        run terraform script with AWS provider
+    }
+
+    int add(int a, int b) {
+        a + b
+    }
+}
+
+class GCP_DNS implements DNS {
+    void addDNSRecord(a, b) {
+        run terraform script with GCP provider
+    }
+
+}
+
+def dns = new AWS_DNS(this)
+def dns = new DNS.AWS(this)
+
+class AWS_DNS {
+
+    def addRecord() {
+        println "a"
+    }
+}
+
+class DNS {
+
+    AWS_DNS getAWS() {
+        return new AWS_DNS
+    }
+}
+
+new FirstOne().a()
+println("")
+new SecondOne().b()
+
+def dns = new DNS.getAWS()
+dns.addRecord()
+
+class Outer {
+    private String privateStr
+
+    def callInnerMethod() {
+        new Inner().methodA()
+    }
+
+    class Inner {
+        def methodA() {
+            println "${privateStr}"
+        }
+    }
+}
+
+class DNS {
+    AWS_DNS AWS() {
+        return new AWS_DNS()
+    }
+
+    GCP_DNS GCP() {
+        return new GCP_DNS()
+    }
+}
+
+class AWS_DNS implements DNSInterface {
+    def addRecord(String zone, String record, String type, int ttl, string publicIP) {
+        pass through Ansible config / Terraform vars
+        run script
+    }
+}
+
+def dns = new DNS().AWS()
+dns.addRecord('example.com', 'sub.example.com', 'A', 300, 'http://54.196.220.82')
+
+def dns = new DNS().AWS(config)
+dns.addRecord()
+
+public abstract class Item<V> {
+    public abstract void use(V, v)
+}
+
+public class MyItem extends Item<MyValueClass> {
+    public void use(MyValueClass v) {
+
+    }
+}
+
+def foo(Object... args)
+
+trait UserTrait {
+    abstract String name()
+    
+    String showName() {
+       return "Hello, ${name()}!"
+    }
+}
+class Employee implements UserTrait {
+    String name() {
+        return 'Bob'
+    }
+}
+
+trait Named {
+    String name                                     
+}
+trait Polite extends Named {                        
+    String introduce() { "Hello, I am $name" }      
+}
+class Person implements Polite {}
+def p = new Person(name: 'Alice')                   
+assert p.introduce() == 'Hello, I am Alice' 
+
+
+interface ObjectStorage {
+    void addBucket(can be variable)
+}
+
+class AWSObjectStorage implements ObjectStorage {
+    void addBucket(String a, String b, String c)
+}
+class GCPObjectStorage implements ObjectStorage {
+    void addBucket(String a, String b, Integer d)
+}
+
+class AWS_DNS implements DNS {
+    AWS_DNS(Object config) {
+        this.config = config
+    }
+
+    addBucket() {
+        run terraform scripts with passed in variables
+    }
+}
+
+class AWS_DNS implements AWS, DNS {
+    // AWS has common details auth
+    // DNS has common details about DNS resource like addRecord
+}
+
+def map = [name: "Jerry", age: 42, city: "New York"]
+
+class Baz {
+  String foo = "foo2"
+  int bar = 2
+
+  public Map asMap() {
+    this.class.declaredFields.findAll { !it.synthetic }.collectEntries {
+      [ (it.name):this."$it.name" ]
+    }
+  }
+}
+
+class BaseObject {
+
+  Map asMap() {
+    def jsonSlurper = new groovy.json.JsonSlurperClassic()
+    Map map = jsonSlurper.parseText(this.asJson())
+    return map
+  }
+
+  String asJson(){
+    def jsonOutput = new groovy.json.JsonOutput()
+    String json = jsonOutput.toJson(this)
+    return json
+  }
+
+}
+
+import groovy.transform.ToString
+ 
+@ToString(includeNames=true)
+class Address {
+int streetNumber
+String streetName
+}
+@ToString(includeNames=true)
+class Person {
+Map asMap() {
+this.class.declaredFields.findAll { !it.synthetic }.collectEntries {  
+[ (it.name):this."$it.name" ]
+}}
+String name
+int age
+Address address
+List<String> phoneNumbers
+ 
+}
+
+def foo(Map args) { "${args.name}: ${args.age}" }
+foo(name: 'Marie', age: 1)
+
+def foo(Object... args) { args.length }
+assert foo() == 0
+assert foo(1) == 1
+assert foo(1, 2) == 2
+
+class AWS {
+    AWS(Object providerConfig) {
+        this.providerConfig = providerConfig
+    }
+
+    AWS_DNS DNS(resourceConfig) {
+        return new AWS_DNS(resourceConfig)
+    }
+}
+
+class DNS {
+    void addRecord()
+}
+
+class AWS_DNS implements DNS {
+    AWS_DNS(Object resourceConfig) {
+        this.resourceConfig = resourceConfig
+    }
+
+    void addRecord() {
+        // prep the variables
+        // run route53.tf
+    }
+}
+
+// Ansible good for setting up config
+def aws = new AWS(providerConfig)
+def dns = aws.DNS(resourceConfig)
+dns.addRecord()
+
+def gcp = new GCP(providerConfig)
+def dns = gcp.DNS(resourceConfig)
+dns.addRecord()
+
+providers/
+    AWS.groovy
+    GCP.groovy
+    Azure.groovy
+resources/
+    DNS/
+        DNSInterface.groovy
+        AWS/
+            AWS_DNS.groovy
+            terraform/
+                route53.tf
+        GCP/
+            GCP_DNS.groovy
+            terraform/
+                cloudDNS.tf
+        Azure/
+            Azure_DNS.groovy
+            terraform/
+                azureDNS.tf
+    ObjectStorage/
+        ObjectStorageInterface.groovy
+        AWS/
+            AWS_ObjectStorage.groovy
+            terraform/
+                s3.tf
+        GCP/
+            GCP_ObjectStorage.groovy
+            terraform/
+                cloudStorage.tf
+        Azure/
+            Azure_ObjectStorage.groovy
+            terraform/
+                azureStorage.tf

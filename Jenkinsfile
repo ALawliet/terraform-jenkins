@@ -38,6 +38,8 @@ pipeline {
         stage('Check logs') {
             steps {
                 filterLogs('WARNING', 1)
+                def request = libraryResource 'request.json'
+                echo "request ${request}"
             }
         }
     }

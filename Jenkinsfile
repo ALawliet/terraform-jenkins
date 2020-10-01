@@ -65,9 +65,11 @@ pipeline {
 
                     def terraformscript = libraryResource './terraform/main.tf'
                     writeFile file: './terraform/main.tf', text: terraformscript
-                    sh 'terraform init ./terraform'
-                    sh 'terraform validate ./terraform'
-                    sh 'terraform plan ./terraform'
+                    dir ('./terraform') {
+                        sh 'terraform init'
+                        sh 'terraform validate'
+                        sh 'terraform plan'
+                    }
                 }
             }
         }

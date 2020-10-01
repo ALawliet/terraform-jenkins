@@ -77,11 +77,9 @@ pipeline {
 
         stage ('Use AWS package') {
             steps {
-                script {
-                    def aws = new AWS()
-                    def dns = aws.DNS()
-                    dns.addRecord()
-                }
+                def aws = new AWS()
+                def dns = aws.DNS()
+                dns.addRecord()
             }
         }
     }

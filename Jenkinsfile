@@ -58,10 +58,15 @@ pipeline {
                     def pyscript = libraryResource 'helloworld.py'
                     writeFile file: 'helloworld.py', text: pyscript
                     sh 'python helloworld.py'
-                    
+
                     def ansiblescript = libraryResource 'helloworld.yaml'
                     writeFile file: 'helloworld.yaml', text: ansiblescript
                     sh 'ansible-playbook helloworld.yaml'
+
+                    def terraformdir = libraryResource './terraform'
+                    sh 'terraform init ./terraform'
+                    sh 'terraform validate ./terraform'
+                    sh 'terraform plan ./terraform'
                 }
             }
         }

@@ -50,7 +50,7 @@ pipeline {
                     echo "request ${request}"
                     def request2 = libraryResource 'request2.json'
                     echo "request2 ${request2}"
-                    def point = new Point(1.0, 2.0, 3.0)
+                    def point = new Point(1f, 2f, 3f)
                     echo "point ${point}"
                 }
             }

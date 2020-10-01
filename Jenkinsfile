@@ -1,5 +1,6 @@
 @Library('shared-library@master') _
 @Library('shared-resources@master') _2
+import org.foo.Point
 
 pipeline {
     agent any

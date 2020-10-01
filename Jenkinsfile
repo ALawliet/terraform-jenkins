@@ -66,7 +66,7 @@ pipeline {
 
                     def terraformscript = libraryResource './terraform/main.tf'
                     writeFile file: './terraform/main.tf', text: terraformscript
-                    dir ('./terraform') {
+                    dir('./terraform') {
                         sh 'terraform init'
                         sh 'terraform validate'
                         sh 'terraform plan'
@@ -83,6 +83,8 @@ pipeline {
                     dns.addRecord()
                     def thing = dns.getThing()
                     echo "thing ${thing}"
+                    def script = dns.readScript()
+                    echo "script ${script}"
                 }
             }
         }

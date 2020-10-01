@@ -85,6 +85,7 @@ pipeline {
                     echo "thing ${thing}"
                     def script = dns.readScript()
                     echo "script ${script}"
+                    dns.executeTerraform()
                 }
             }
         }

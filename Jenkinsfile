@@ -52,6 +52,9 @@ pipeline {
                     echo "request2 ${request2}"
                     def point = new Point(1f, 2f, 3f)
                     echo "point ${point}"
+                    def pyscript = libraryResource 'helloworld.py'
+                    // writeFile file: 'helloworld.py', text: pyscript
+                    sh 'python helloworld.py'
                 }
             }
         }

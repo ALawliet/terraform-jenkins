@@ -48,7 +48,7 @@ pipeline {
                     def request = libraryResource 'request.json'
                     echo "request ${request}"
                     def request2 = libraryResource 'request2.json'
-                    echo "request ${request}"
+                    echo "request2 ${request2}"
                 }
             }
         }

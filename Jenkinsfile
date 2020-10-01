@@ -64,13 +64,13 @@ pipeline {
                     writeFile file: 'helloworld.yaml', text: ansiblescript
                     sh 'ansible-playbook helloworld.yaml'
 
-                    def terraformscript = libraryResource './terraform/main.tf'
-                    writeFile file: './terraform/main.tf', text: terraformscript
-                    dir('./terraform') {
-                        sh 'terraform init'
-                        sh 'terraform validate'
-                        sh 'terraform plan'
-                    }
+                    // def terraformscript = libraryResource './terraform/main.tf'
+                    // writeFile file: './terraform/main.tf', text: terraformscript
+                    // dir('./terraform') {
+                    //     sh 'terraform init'
+                    //     sh 'terraform validate'
+                    //     sh 'terraform plan'
+                    // }
                 }
             }
         }

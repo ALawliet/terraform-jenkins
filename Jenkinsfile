@@ -78,18 +78,20 @@ pipeline {
         stage('Use AWS package') {
             steps {
                 script {
-                    def config = [name:"Jerry", age:42, city:"New York", hobby:"Singing"]
-                    def aws = new AWS(this, config)
+                    def providerConfig = [region:"us-east-1"]
+                    def aws = new AWS(this, providerConfig)
+                    def readProviderConfig = aws.getProviderConfig()
+                    echo "readProviderConfig ${readProviderConfig}"
                     def dns = aws.DNS()
-                    dns.addRecord()
+                    def resourceConfig = [name:"www.example.com", type:"A", ttl:"300"]
+                    def addRecordRes = dns.addRecord(resourceConfig)
+                    echo "resourceConfig ${addRecordRes}"
                     def thing = dns.getThing()
                     echo "thing ${thing}"
                     def script = dns.readScript()
                     echo "script ${script}"
                     dns.executeTerraform()
                     // dns.executeTerraform2()
-                    def readConfig = aws.getConfig()
-                    echo "config ${config}"
                 }
             }
         }

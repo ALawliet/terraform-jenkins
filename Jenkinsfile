@@ -92,6 +92,8 @@ pipeline {
                     echo "script ${script}"
                     dns.executeTerraform()
                     // dns.executeTerraform2()
+                    def json = dns.getResourceConfigAsJSON(resourceConfig)
+                    echo "json ${json}"
                 }
             }
         }
